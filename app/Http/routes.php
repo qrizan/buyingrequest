@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/buyingrequest', 'BuyersController@index');
+Route::post('/buyingrequest/store', ['as' => 'buyingrequest.store', 'uses' => 'BuyersController@store']);
+Route::get('/buyingrequest/verifikasi/{encrypt}', 'BuyersController@verifikasi');
+
+Route::group(['middleware' => 'web'], function () {
+	Route::auth();
+	Route::get('/home', 'HomeController@index');
 });

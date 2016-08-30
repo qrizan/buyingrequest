@@ -1,0 +1,1 @@
+Klik disini untuk verifikasi email : {{ url('buyingrequest/verifikasi/'.$email) }}
