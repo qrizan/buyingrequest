@@ -20,7 +20,7 @@ class CreateBuyingrequestsTable extends Migration
             $table->string('phone');                        
             $table->date('expired');                        
             $table->date('deadline');
-            $table->integer('status');            
+            $table->enum('status', ['pending', 'respond','rejected','approved']);                
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@
 								<th>Email</th>
 								<th>Time Expired</th>
 								<th>Time Deadline</th>			
+								<th></th>											
 							</tr>
 						</thead>
 					<tbody>
@@ -21,6 +22,11 @@
 							<td>{{ $r->email }}</td>
 							<td>{{ $r->expired }}</td>
 							<td>{{ $r->deadline }}</td>			
+							<td>
+							@if (Auth::user()->role == 'seller')
+								<a href="{{ route('buyingrequest.show', $r->id)}}" class="btn btn-primary btn-sm">View</a>
+							@endif
+							</td>													
 						</tr>
 					@endforeach
 					</tbody>

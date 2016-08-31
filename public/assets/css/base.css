@@ -1,0 +1,10 @@
+body {
+    font-family: 'Lato';
+}
+
+.fa-btn {
+    margin-right: 6px;
+}
+.datepicker{
+    padding: 6px 12px; 
+}     

@@ -38,9 +38,10 @@
 	    			</div>
 
 	    			<div class="row">
-	    				<div class="col-md-3">
+	    				<div class="col-md-12">
 	    					<a href="{{ route('respondrequest.nego', $showrequest->id)}}" class="btn btn-primary btn-sm btn-warning">Negosiasi</a>
 	    					<a href="{{ route('respondrequest.report', $showrequest->id)}}" class="btn btn-primary btn-sm btn-danger">Laporkan</a>
+	    					<a href="{{ URL::previous() }}" class="btn btn-sm btn-default pull-right">Cancel</a>		    	
 	    				</div>
 	    			</div>
                 </div>

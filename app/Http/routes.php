@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/all-report-request', 'SellersController@allReportRequest');		
 	Route::get('/all-respond-request', 'SellersController@allRespondRequest');		
 	Route::get('/all-request-approved', 'SellersController@allRequestApproved');		
+	Route::get('/all-respond-approved', 'SellersController@allRespondApproved');		
 
 	Route::get('/buyingrequest/{request_id}', 
 		['as' => 'buyingrequest.show', 'uses' => 'SellersController@showRequest']

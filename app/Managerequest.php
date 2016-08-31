@@ -8,7 +8,7 @@ class Managerequest extends Model
 {
 	protected $fillable = ['deskripsi','deadline','comment','request_id'];
 
-	public function Buyingrequest()
+	public function buyingrequest()
 	{
 		return $this->belongsTo('App\Buyingrequest','request_id');
 	}	

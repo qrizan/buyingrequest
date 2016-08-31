@@ -14,20 +14,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('assets/css/base.css') }}"> 
+
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-        .datepicker{
-            padding: 6px 12px; 
-        }            
-    </style>
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
@@ -54,7 +44,9 @@
                     @if (Auth::guest())                    
                         <li><a href="{{ url('/buyingrequest') }}">Request</a></li>
                     @else
-                        <li><a href="{{ url('/home') }}">Home</a></li>                    
+                        @if(Auth::user()->role != 'seller')
+                            <li><a href="{{ url('/buyingrequest') }}">Request</a></li>                    
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Permintaan <span class="caret"></span>
@@ -64,17 +56,19 @@
                                 <li><a href="{{ url('/all-request') }}">Seluruh Permintaan</a></li>
                                 <li><a href="{{ url('/all-report-request') }}">Permintaan Ditolak</a></li>
                                 <li><a href="{{ url('/all-respond-request') }}">Permintaan Direspon</a></li>
+                                <li><a href="{{ url('/all-respond-approved') }}">Permintaan Disetujui</a></li>
                             </ul>                            
                         </li>    
 
+                        @if(Auth::user()->role == 'seller')
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Penawaran <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/all-request-approved') }}">Penawaran Diterima</a></li>
                             </ul>
-                        </li>                                                                    
+                        </li>    
+                        @endif                                                                                        
                     @endif                    
                 </ul>
 
@@ -83,7 +77,6 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -113,27 +106,7 @@
     <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>    
-    <script type="text/javascript">
-      var deadline = 0;
-
-      $('#expired  ').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: new Date(),
-        autoclose: true,
-        orientation: 'auto'
-      }).on('changeDate', function (selected) {
-        var deadline = new Date(selected.date.valueOf());
-        $('#deadline').val('');
-        $('#deadline').datepicker('setStartDate', deadline);
-      });
-
-      $('#deadline').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        orientation: 'auto'
-      });   
-
-    </script>
+    <script src="{{ asset('assets/js/base.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

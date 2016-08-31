@@ -6,7 +6,7 @@
 
 <div class="form-group {!! $errors->has('deadline') ? 'has-error' : '' !!}">
 	{!! Form::label('deadline', 'Deadline penyediaan barang') !!}
-	{!! Form::text('deadline', $showrequest->deadline, ['class'=>'form-control datepicker']) !!}
+	{!! Form::text('deadline', $showrequest->deadline, ['class'=>'form-control datepicker-default']) !!}
 	{!! $errors->first('deadline', '<p class="help-block">:message</p>') !!}					
 </div>					
 

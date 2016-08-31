@@ -49,9 +49,8 @@ class BuyersController extends Controller
         // check create akun otomatis 
         $agree = $request->input('agree');        
         if ($agree == 1){
-            $email = $request->input('email');
-
             // check email exist di database
+            $email = $request->input('email');
             $email_user = User::where('email', $email)->first();
 
             // jika email belum terdaftar
@@ -64,7 +63,7 @@ class BuyersController extends Controller
             } 
         } 
 
-        $data['status'] = 0; // status default request
+        $data['status'] = 'pending'; // status default request
         Buyingrequest::create($data); // simpan ke database
         return redirect()->to('/');
 	}
@@ -91,8 +90,7 @@ class BuyersController extends Controller
         try {
             $email = Crypt::decrypt($email_encrypt); // dekripsi 
         } catch (DecryptException $e) {
-            session()->flash('msg','Error');        
-            return redirect()->to('/');        
+            echo $e;
         }
         $user = User::create([
             'email' => $email,
@@ -102,7 +100,7 @@ class BuyersController extends Controller
         $user->save();   
 
         // show all request by email
-        $allrequests = Buyingrequest::where('status',0)->where('email',$email)->get();
+        $allrequests = Buyingrequest::where('status','pending')->where('email',$email)->get();
         return view('buyers.allrequests', compact('allrequests'));           
     }
 }

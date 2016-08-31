@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Semua Permintaan</div>
+                <div class="panel-heading">Semua Permintaan Yang Di Setujui</div>
 
                 <div class="panel-body">
 					<table class="table table-hover">
@@ -12,19 +12,15 @@
 							<tr>
 								<th>Email</th>
 								<th>Time Expired</th>
-								<th>Time Deadline</th>			
-								<th>#</th>											
+								<th>Time Deadline</th>	
 							</tr>
 						</thead>
 					<tbody>
-					@foreach($allrequests as $r)
+					@foreach($allapproved as $r)
 						<tr>
 							<td>{{ $r->email }}</td>
 							<td>{{ $r->expired }}</td>
-							<td>{{ $r->deadline }}</td>			
-							<td>
-								<a href="{{ route('buyingrequest.show', $r->id)}}" class="btn btn-primary btn-sm">View</a>
-							</td>													
+							<td>{{ $r->deadline }}</td>									
 						</tr>
 					@endforeach
 					</tbody>
