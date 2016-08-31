@@ -18,6 +18,11 @@ class BuyersController extends Controller
 		return view('buyers.request');
 	}
 
+    public function create()
+    {
+        return view('buyers.request');
+    }
+
     /**
      * Create a new request after a valid 
      * @param  array  $data
@@ -51,24 +56,22 @@ class BuyersController extends Controller
 
             // jika email belum terdaftar
             if (is_null($email_user)) {
-
-                //enkripsi email address untuk parameter link verifikasi
-                $email_encrypt = Crypt::encrypt($email); 
+                $email_encrypt = Crypt::encrypt($email); //enkripsi email address untuk parameter link verifikasi
                 Mail::send('buyers.email-verification', ['email' => $email_encrypt], function($message) use ($email){
                     $message->to($email, 'New Customer')->subject('Verifikasi pembuatan akun Ralali');
                 });                
+                session()->flash('msg','Request anda berhasil dikirim,silahkan cek email untuk melakukan verifikasi');
             } 
-            session()->flash('msg','Request anda berhasil dikirim,silahkan cek email untuk melakukan verifikasi');
-        }
+        } 
 
+        $data['status'] = 0; // status default request
         Buyingrequest::create($data); // simpan ke database
-        session()->flash('msg','Request anda berhasil dikirim');        
         return redirect()->to('/');
 	}
 
     /**
      * Save image from form request
-     * @param  array  $data
+     * @param  $image
      */
     protected function saveImage(UploadedFile $image)
     {
@@ -80,24 +83,21 @@ class BuyersController extends Controller
 
     /**
      * Create a new user valid verification 
-     * @param  array  $data
+     * @param $email_encrypt
      */    	
     public function verifikasi(Request $request, $email_encrypt)
     {
         $password = 'rahasia'; // pasword default
         try {
-            $email = Crypt::decrypt($email_encrypt); // dekripsi email
+            $email = Crypt::decrypt($email_encrypt); // dekripsi 
         } catch (DecryptException $e) {
             session()->flash('msg','Error');        
             return redirect()->to('/');        
         }
-
-        // save into database
         $user = User::create([
             'email' => $email,
             'password' => bcrypt($password)
         ]);
-
         $user->role = 'buyer';
         $user->save();
                         

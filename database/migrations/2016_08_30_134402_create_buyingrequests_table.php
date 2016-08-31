@@ -19,7 +19,8 @@ class CreateBuyingrequestsTable extends Migration
             $table->string('email');            
             $table->string('phone');                        
             $table->date('expired');                        
-            $table->date('deadline');                        
+            $table->date('deadline');
+            $table->integer('status');            
             $table->timestamps();
         });
     }

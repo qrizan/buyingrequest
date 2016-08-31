@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBuyersTable extends Migration
+class CreateManagerequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,12 @@ class CreateBuyersTable extends Migration
      */
     public function up()
     {
-        Schema::create('buyers', function (Blueprint $table) {
+        Schema::create('managerequests', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('deskripsi');
+            $table->date('deadline');            
+            $table->text('comment');
+            $table->integer('request_id');
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ class CreateBuyersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('buyers');
+        Schema::drop('managerequests');
     }
 }

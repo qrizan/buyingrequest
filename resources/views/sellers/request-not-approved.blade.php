@@ -1,0 +1,1 @@
+Permintaan data barang dengan desktripsi berikut tidak tersedia : {{ $deskripsi }}
