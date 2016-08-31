@@ -60,7 +60,7 @@ class BuyersController extends Controller
                 Mail::send('buyers.email-verification', ['email' => $email_encrypt], function($message) use ($email){
                     $message->to($email, 'New Customer')->subject('Verifikasi pembuatan akun Ralali');
                 });                
-                session()->flash('msg','Request anda berhasil dikirim,silahkan cek email untuk melakukan verifikasi');
+                session()->flash('msg','Request anda berhasil dikirim,silahkan cek email (storage/logs/laravel.log) untuk melakukan verifikasi');
             } 
         } 
 
@@ -99,8 +99,10 @@ class BuyersController extends Controller
             'password' => bcrypt($password)
         ]);
         $user->role = 'buyer';
-        $user->save();
-                        
-        return view('buyers.page-verification');
+        $user->save();   
+
+        // show all request by email
+        $allrequests = Buyingrequest::where('status',0)->where('email',$email)->get();
+        return view('buyers.allrequests', compact('allrequests'));           
     }
 }

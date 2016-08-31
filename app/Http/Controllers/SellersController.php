@@ -53,7 +53,6 @@ class SellersController extends Controller
             $message->to($email, 'Not Approved Request')->subject('Permintaan ditolak');
         });                                
 
-
         session()->flash('msg','Pesan permintaan ditolak berhasil dikirim');                
         return redirect()->to('/all-request');        
     }    
@@ -76,7 +75,6 @@ class SellersController extends Controller
         return view('sellers.negorequest', compact('showrequest'));
     }    
 
-
     /**
      * Get all data request respond
      */
@@ -91,8 +89,8 @@ class SellersController extends Controller
      */
     public function showReSpondRequest($id)
     {
-        $responds = Managerequest::where('request_id',$id)->get();
-        return view('sellers.showresponds', compact('responds'));
+        $respond = Managerequest::where('request_id',$id)->first();
+        return view('sellers.showresponds', compact('respond'));
     }    
 
     /**
@@ -111,9 +109,10 @@ class SellersController extends Controller
         $data = $request->all(); // ambil data dari form request
 
         $request = Buyingrequest::findOrFail($data['request_id']); // cari data request berdasarkan id
-        $request['status'] = 1; // ubah status request
+        $request['status'] = 1; // ubah status request menjadi responded
         $request->save();
-    
+
+        $data['status'] = 0; // set default status penawaran     
         Managerequest::create($data); // simpan ke database
 
         // Mail::send('buyers.email-verification', ['email' => $email_encrypt], function($message) use ($email){
@@ -122,4 +121,25 @@ class SellersController extends Controller
         session()->flash('msg','Reepond negosiasi ke buyer anda berhasil dikirim');        
         return redirect()->to('/');        
     }    
+
+    /**
+     * form message from buyer to seller
+     */
+    public function message()
+    {
+        return view('sellers.message');     
+    }    
+
+    /**
+     * Approved respond from buyer
+     */
+    public function approvedReSpondRequest($id)
+    {
+        $request = Managerequest::findOrFail($id);
+
+        $request['status'] = 1; // set status penawaran menjadi approved
+        $request->save();
+        session()->flash('msg','Negosiasi berhasil di setujui');        
+        return redirect()->to('/home');        
+    }        
 }

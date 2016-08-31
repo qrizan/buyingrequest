@@ -25,6 +25,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/all-request', 'SellersController@allRequest');	
 	Route::get('/all-report-request', 'SellersController@allReportRequest');		
 	Route::get('/all-respond-request', 'SellersController@allRespondRequest');		
+	Route::get('/all-request-approved', 'SellersController@allRequestApproved');		
 
 	Route::get('/buyingrequest/{request_id}', 
 		['as' => 'buyingrequest.show', 'uses' => 'SellersController@showRequest']
@@ -45,4 +46,12 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/respondrequest/{request_id}', 
 		['as' => 'respondrequest.show', 'uses' => 'SellersController@showReSpondRequest']
 	);		
+
+	Route::get('/respondmessage/', 
+		['as' => 'respond.message', 'uses' => 'SellersController@message']
+	);		
+
+	Route::get('/respondapproved/{id}', 
+		['as' => 'respondrequest.approved', 'uses' => 'SellersController@approvedReSpondRequest']
+	);			
 });

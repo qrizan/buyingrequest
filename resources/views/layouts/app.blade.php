@@ -62,10 +62,19 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/all-request') }}">Seluruh Permintaan</a></li>
-                                <li><a href="{{ url('/all-report-request') }}">Permintaan Dilaporkan</a></li>
-                                <li><a href="{{ url('/all-respond-request') }}">Permintaan Direspon</a></li>                                                                
+                                <li><a href="{{ url('/all-report-request') }}">Permintaan Ditolak</a></li>
+                                <li><a href="{{ url('/all-respond-request') }}">Permintaan Direspon</a></li>
+                            </ul>                            
+                        </li>    
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Penawaran <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/all-request-approved') }}">Penawaran Diterima</a></li>
                             </ul>
-                        </li>                        
+                        </li>                                                                    
                     @endif                    
                 </ul>
 

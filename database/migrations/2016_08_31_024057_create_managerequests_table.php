@@ -18,6 +18,7 @@ class CreateManagerequestsTable extends Migration
             $table->date('deadline');            
             $table->text('comment');
             $table->integer('request_id');
+            $table->integer('status');
             $table->timestamps();
         });
     }
