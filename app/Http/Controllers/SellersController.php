@@ -163,7 +163,7 @@ class SellersController extends Controller
         $request = Buyingrequest::findOrFail($respond['request_id']);
 
         $respond['status'] = 'approved'; // set status penawaran menjadi approved
-        $request['status'] = 'approved'; // set status penawaran menjadi approved        
+        $request['status'] = 'approved'; // set status permintaan menjadi approved        
         $respond->save();
         $request->save();        
         session()->flash('msg','Negosiasi berhasil di setujui');        
