@@ -58,7 +58,7 @@ class SellersController extends Controller
         $showrequest->save();
         
         $email = $showrequest->email;
-        Mail::send('requests.request-not-approved', ['deskripsi' => $showrequest->deskripsi], function($message) use ($email){
+        Mail::send('requests.request-email', ['status' => 'tolak'], function($message) use ($email){
             $message->to($email, 'Not Approved Request')->subject('Permintaan ditolak');
         });                                
 
@@ -138,9 +138,10 @@ class SellersController extends Controller
         $data['status'] = 'pending'; // set default status penawaran     
         Managerequest::create($data); // simpan ke database
 
-        // Mail::send('buyers.email-verification', ['email' => $email_encrypt], function($message) use ($email){
-        //     $message->to($email, 'New Customer')->subject('Verifikasi pembuatan akun Ralali');
-        // });                        
+        $email = $request->email;
+        Mail::send('requests.request-email', ['status' => 'terima'], function($message) use ($email){
+            $message->to($email, 'Approved Request')->subject('Permintaan diterima');
+        });                   
         session()->flash('msg','Reepond negosiasi ke buyer anda berhasil dikirim');        
         return redirect()->to('/');        
     }    

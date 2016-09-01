@@ -9,7 +9,6 @@ $('#expired').datepicker({
       var deadline = new Date(selected.date.valueOf());
       $('#deadline').val('');
       $('#deadline').datepicker('setStartDate', deadline);
-    }
 });
 
 $('#deadline').datepicker({

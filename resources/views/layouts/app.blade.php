@@ -42,10 +42,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (Auth::guest())                    
-                        <li><a href="{{ url('/buyingrequest') }}">Request</a></li>
+                        <li><a href="{{ url('/buyingrequest') }}">Buying Request</a></li>
                     @else
                         @if(Auth::user()->role != 'seller')
-                            <li><a href="{{ url('/buyingrequest') }}">Request</a></li>                    
+                            <li><a href="{{ url('/buyingrequest') }}">Buying Request</a></li>                    
                         @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -53,7 +53,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/all-request') }}">Seluruh Permintaan</a></li>
+                                <li><a href="{{ url('/all-request') }}">Permintaan Belum Direspon</a></li>
                                 <li><a href="{{ url('/all-report-request') }}">Permintaan Ditolak</a></li>
                                 <li><a href="{{ url('/all-respond-request') }}">Permintaan Direspon</a></li>
                                 <li><a href="{{ url('/all-respond-approved') }}">Permintaan Disetujui</a></li>
