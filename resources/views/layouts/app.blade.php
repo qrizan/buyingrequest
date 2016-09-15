@@ -34,7 +34,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Customer Request | Ralali{dot}com
+                    Customer Request
                 </a>
             </div>
 
